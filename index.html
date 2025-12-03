@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía UDFs - Biblioteca Universitaria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #3949ab;
+            --accent: #3f51b5;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9800, #4caf50, #2196f3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header h2 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--accent);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaf6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title i {
+            color: var(--accent);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Database Section */
+        .database-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .table-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .table-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .table-card:hover {
+            background: #e8eaf6;
+            transform: translateX(5px);
+        }
+
+        .table-name {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .column {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        /* Functions Section */
+        .functions-section {
+            margin-bottom: 40px;
+        }
+
+        .function-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .function-card:hover {
+            transform: translateX(10px);
+        }
+
+        .scalar {
+            border-left-color: var(--success);
+        }
+
+        .table-func {
+            border-left-color: var(--warning);
+        }
+
+        .function-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .function-name {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .function-type {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .type-scalar {
+            background: var(--success);
+        }
+
+        .type-table {
+            background: var(--warning);
+        }
+
+        .function-desc {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .function-params {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaf6 100%);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-arrow {
+            position: absolute;
+            right: -15px;
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .repo-link {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .repo-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .step-arrow {
+                display: none;
+            }
+            
+            .flow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-database"></i> Funciones Definidas por el Usuario</h1>
+            <h2>Sistema de Gestión de Biblioteca Universitaria</h2>
+            <p>Universidad Andina del Cusco - Facultad de Ingeniería y Arquitectura</p>
+        </div>
+
+        <!-- Introducción -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-info-circle"></i> Introducción al Proyecto</h2>
+            <p>Implementación de 10 funciones UDFs para la gestión eficiente de una biblioteca universitaria, incluyendo 5 funciones escalares y 5 funciones de tabla que automatizan procesos críticos del sistema.</p>
+            
+            <div class="grid">
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px;">
+                    <h3><i class="fas fa-check-circle" style="color: var(--success);"></i> Objetivos</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Automatizar cálculo de multas</li>
+                        <li>Validar formatos de ISBN</li>
+                        <li>Generar códigos únicos</li>
+                        <li>Generar reportes estadísticos</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #fff3e0; padding: 20px; border-radius: 10px;">
+                    <h3><i class="fas fa-star" style="color: var(--warning);"></i> Beneficios</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Reutilización de código</li>
+                        <li>Centralización de lógica</li>
+                        <li>Consistencia en cálculos</li>
+                        <li>Optimización de rendimiento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Base de Datos -->
+        <div class="database-container">
+            <h2 class="card-title"><i class="fas fa-sitemap"></i> Estructura de la Base de Datos</h2>
+            <p>Base de datos "BibliotecaUniversitaria" con 10 tablas principales:</p>
+            
+            <div class="table-list">
+                <!-- Tabla Libros -->
+                <div class="table-card">
+                    <div class="table-name"><i class="fas fa-book"></i> Libros</div>
+                    <div class="column">LibroID (PK)</div>
+                    <div class="column">ISBN</div>
+                    <div class="column">Título</div>
+                    <div class="column">AutorPrincipal</div>
+                    <div class="column">Categoría</div>
+                    <div class="column">CopiasDisponibles</div>
+                </div>
+
+                <!-- Tabla Usuarios -->
+                <div class="table-card">
+                    <div class="table-name"><i class="fas fa-users"></i> Usuarios</div>
+                    <div class="column">UsuarioID (PK)</div>
+                    <div class="column">CódigoUsuario</div>
+                    <div class="column">Nombre</div>
+                    <div class="column">Apellido</div>
+                    <div class="column">TipoUsuario</div>
+                    <div class="column">MultaAcumulada</div>
+                </div>
+
+                <!-- Tabla Préstamos -->
+                <div class="table-card">
+                    <div class="table-name"><i class="fas fa-exchange-alt"></i> Préstamos</div>
+                    <div class="column">PrestamoID (PK)</div>
+                    <div class="column">LibroID (FK)</div>
+                    <div class="column">UsuarioID (FK)</div>
+                    <div class="column">FechaPrestamo</div>
+                    <div class="column">FechaDevolucionEsperada</div>
+                    <div class="column">EstadoPrestamo</div>
+                </div>
+
+                <!-- Tabla Multas -->
+                <div class="table-card">
+                    <div class="table-name"><i class="fas fa-exclamation-triangle"></i> Multas</div>
+                    <div class="column">MultaID (PK)</div>
+                    <div class="column">PrestamoID (FK)</div>
+                    <div class="column">UsuarioID (FK)</div>
+                    <div class="column">Monto</div>
+                    <div class="column">FechaGeneracion</div>
+                    <div class="column">EstadoMulta</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funciones Escalares -->
+        <div class="functions-section">
+            <h2 class="card-title"><i class="fas fa-calculator"></i> Funciones Escalares (5)</h2>
+            
+            <div class="grid">
+                <!-- Función 1 -->
+                <div class="function-card scalar">
+                    <div class="function-header">
+                        <div class="function-name">CalcularMultaRetraso()</div>
+                        <span class="function-type type-scalar">Escalar</span>
+                    </div>
+                    <div class="function-desc">Calcula multas por retraso en devolución de libros considerando días de gracia y tope máximo.</div>
+                    <div class="function-params">
+                        Parámetros: @FechaDevolucionEsperada, @FechaDevolucionReal, @MultaPorDia, @DiasGracia<br>
+                        Retorno: DECIMAL(10,2)
+                    </div>
+                </div>
+
+                <!-- Función 2 -->
+                <div class="function-card scalar">
+                    <div class="function-header">
+                        <div class="function-name">ValidarISBN()</div>
+                        <span class="function-type type-scalar">Escalar</span>
+                    </div>
+                    <div class="function-desc">Valida formato ISBN-10 e ISBN-13 usando algoritmos de verificación oficiales.</div>
+                    <div class="function-params">
+                        Parámetros: @ISBN VARCHAR(20)<br>
+                        Retorno: BIT (1=válido, 0=inválido)
+                    </div>
+                </div>
+
+                <!-- Función 3 -->
+                <div class="function-card scalar">
+                    <div class="function-header">
+                        <div class="function-name">FormatearNombreCompleto()</div>
+                        <span class="function-type type-scalar">Escalar</span>
+                    </div>
+                    <div class="function-desc">Formatea nombres de usuarios con títulos según tipo (Dr., Est., Lic.) en estilo "APELLIDO, Nombre".</div>
+                    <div class="function-params">
+                        Parámetros: @Nombre, @Apellido, @TipoUsuario<br>
+                        Retorno: VARCHAR(150)
+                    </div>
+                </div>
+
+                <!-- Función 4 -->
+                <div class="function-card scalar">
+                    <div class="function-header">
+                        <div class="function-name">GenerarCodigoLibro()</div>
+                        <span class="function-type type-scalar">Escalar</span>
+                    </div>
+                    <div class="function-desc">Genera código único interno para libros combinando categoría, año y últimos dígitos del ISBN.</div>
+                    <div class="function-params">
+                        Parámetros: @ISBN, @AnioPublicacion, @Categoria<br>
+                        Retorno: VARCHAR(50)
+                    </div>
+                </div>
+
+                <!-- Función 5 -->
+                <div class="function-card scalar">
+                    <div class="function-header">
+                        <div class="function-name">CalcularIndiceUsuario()</div>
+                        <span class="function-type type-scalar">Escalar</span>
+                    </div>
+                    <div class="function-desc">Calcula índice de responsabilidad del usuario basado en préstamos vencidos vs totales.</div>
+                    <div class="function-params">
+                        Parámetros: @UsuarioID<br>
+                        Retorno: DECIMAL(5,2) (0-100)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados Funciones Escalares -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-chart-bar"></i> Resultados de Funciones Escalares</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>CalcularMultaRetraso</h3>
+                    <div class="result-value">1.50</div>
+                    <p>Multa por 3 días de retraso</p>
+                </div>
+                <div class="result-card">
+                    <h3>ValidarISBN</h3>
+                    <div class="result-value">1</div>
+                    <p>ISBN válido (978-0132350884)</p>
+                </div>
+                <div class="result-card">
+                    <h3>FormatearNombreCompleto</h3>
+                    <div class="result-value">"Est. PÉREZ, Juan"</div>
+                    <p>Nombre formateado</p>
+                </div>
+                <div class="result-card">
+                    <h3>GenerarCodigoLibro</h3>
+                    <div class="result-value">PRO-2008-0884</div>
+                    <p>Código generado</p>
+                </div>
+                <div class="result-card">
+                    <h3>CalcularIndiceUsuario</h3>
+                    <div class="result-value">100.00</div>
+                    <p>Índice de responsabilidad</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funciones de Tabla -->
+        <div class="functions-section">
+            <h2 class="card-title"><i class="fas fa-table"></i> Funciones de Tabla (5)</h2>
+            
+            <div class="grid">
+                <!-- Función 6 -->
+                <div class="function-card table-func">
+                    <div class="function-header">
+                        <div class="function-name">fn_ObtenerLibrosPorCategoria()</div>
+                        <span class="function-type type-table">Tabla</span>
+                    </div>
+                    <div class="function-desc">Retorna todos los libros filtrados por categoría específica con información detallada.</div>
+                    <div class="function-params">
+                        Parámetro: @CategoriaNombre (opcional)<br>
+                        Retorno: TABLE
+                    </div>
+                </div>
+
+                <!-- Función 7 -->
+                <div class="function-card table-func">
+                    <div class="function-header">
+                        <div class="function-name">fn_ObtenerPrestamosActivosDetalle()</div>
+                        <span class="function-type type-table">Tabla</span>
+                    </div>
+                    <div class="function-desc">Muestra préstamos activos o vencidos con información detallada de usuarios y libros.</div>
+                    <div class="function-params">
+                        Parámetro: @UsuarioID (opcional)<br>
+                        Retorno: TABLE
+                    </div>
+                </div>
+
+                <!-- Función 8 -->
+                <div class="function-card table-func">
+                    <div class="function-header">
+                        <div class="function-name">fn_EstadisticasUsuario()</div>
+                        <span class="function-type type-table">Tabla</span>
+                    </div>
+                    <div class="function-desc">Genera reporte completo de estadísticas del usuario incluyendo índice de responsabilidad.</div>
+                    <div class="function-params">
+                        Parámetro: @UsuarioID<br>
+                        Retorno: @Estadisticas TABLE
+                    </div>
+                </div>
+
+                <!-- Función 9 -->
+                <div class="function-card table-func">
+                    <div class="function-header">
+                        <div class="function-name">fn_LibrosDisponibles()</div>
+                        <span class="function-type type-table">Tabla</span>
+                    </div>
+                    <div class="function-desc">Lista libros disponibles filtrados por categoría y/o editorial con estado de disponibilidad.</div>
+                    <div class="function-params">
+                        Parámetros: @Categoria, @Editorial (opcionales)<br>
+                        Retorno: TABLE
+                    </div>
+                </div>
+
+                <!-- Función 10 -->
+                <div class="function-card table-func">
+                    <div class="function-header">
+                        <div class="function-name">fn_HistorialCompletoUsuario()</div>
+                        <span class="function-type type-table">Tabla</span>
+                    </div>
+                    <div class="function-desc">Combina historial de préstamos con actividad actual para auditoría completa.</div>
+                    <div class="function-params">
+                        Parámetro: @UsuarioID<br>
+                        Retorno: @Historial TABLE
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flujo del Sistema -->
+        <div class="flow-container">
+            <h2 class="card-title"><i class="fas fa-project-diagram"></i> Flujo del Sistema Integrado</h2>
+            
+            <div class="flow-step">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>Validación de Libro</h3>
+                    <p>ISBN → ValidarISBN() → [Válido] → GenerarCodigoLibro()</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>Gestión de Préstamo</h3>
+                    <p>Solicitud → fn_EstadisticasUsuario() → Verificación índice → Aprobación</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">3</div>
+                <div>
+                    <h3>Control de Devolución</h3>
+                    <p>Devolución → CalcularMultaRetraso() → Actualización multas → CalcularIndiceUsuario()</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+            
+            <div class="flow-step">
+                <div class="step-number">4</div>
+                <div>
+                    <h3>Reportes y Auditoría</h3>
+                    <p>fn_HistorialCompletoUsuario() + fn_EstadisticasUsuario() → Reportes consolidados</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventajas -->
+        <div class="grid">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-check-double"></i> Ventajas Clave</h2>
+                <ul style="list-style: none; padding-left: 10px;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-sync-alt" style="color: var(--success); margin-right: 10px;"></i> Reutilización de código</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-code-branch" style="color: var(--accent); margin-right: 10px;"></i> Modularidad y escalabilidad</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-bolt" style="color: var(--warning); margin-right: 10px;"></i> Optimización de rendimiento</li>
+                    <li style="padding: 10px 0;"><i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i> Consistencia en datos</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-lightbulb"></i> Conclusiones</h2>
+                <ul style="list-style: none; padding-left: 10px;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> UDFs escalares para cálculos específicos</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> TVFs para consultas complejas</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Mantenimiento simplificado</li>
+                    <li style="padding: 10px 0;"><i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i> Sistema transformado en motor de reglas</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h2><i class="fas fa-university"></i> Taller 3.3 - Funciones Definidas por el Usuario</h2>
+            <p><strong>Curso:</strong> Base de Datos | <strong>Docente:</strong> Hugo Espetia Huamanga</p>
+            <p><strong>Alumno:</strong> Panccta Tinta Sergio Reynaldo | <strong>Cusco - Perú | 2025</strong></p>
+            
+            <a href="https://github.com/Sergio-Reynaldo-Pancca-Tinta/Taller-Taller-3.3-Funciones-Definidas-por-el-Usuario" 
+               class="repo-link" target="_blank">
+                <i class="fab fa-github"></i> Ver Repositorio en GitHub
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de aparición suave al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card, .function-card, .flow-step');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
